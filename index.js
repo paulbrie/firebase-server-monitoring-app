@@ -1,5 +1,6 @@
 'use strict'
 
+const port = process.env.PORT || 8080;
 const express = require('express')
 const fs = require('fs')
 const http = require('http')
@@ -33,10 +34,9 @@ function monitorNodesjsOrgServer(callback, options, taskStatus) {
 }
 
 // start monitoring
-monody.addTask(monitorNodesjsOrgServer, () => null, 5000)
+monody.addTask(monitorNodesjsOrgServer, () => null, 2000)
 monody.start()
 
-server.listen(process.env.PORT, function () {
-  console.log('Example app listening on port 3000!')
+server.listen(port, function () {
+  console.log(`Listening on port ${port}!`)
 })
-
