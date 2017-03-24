@@ -1,5 +1,7 @@
 # firebase-server-monitoring-app
 
+![chart](https://github.com/paulbrie/firebase-server-monitoring-app/blob/master/firebase.gif "Chart")
+
 ## About the app
 This is a very simple application which monitors nodesjs.org using nodejs and firebase.
 
