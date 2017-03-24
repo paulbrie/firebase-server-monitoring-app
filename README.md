@@ -40,3 +40,5 @@ module.exports = {
 ```
 node index.js
 ```
+- open `http://localhost:8080` in your browser
+```
