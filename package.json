@@ -11,6 +11,6 @@
   "dependencies": {
     "express": "^4.15.2",
     "firebase-admin": "^4.1.3",
-    "monody": "0.0.25",
+    "monody": "0.0.25"
   }
 }
