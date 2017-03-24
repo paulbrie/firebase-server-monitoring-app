@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Firebase Demo</title>
+    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+    
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAq5c7f7_p-Pl5XSssVmgkR5X7ECLZLtKU",
+        authDomain: "analytics-49369.firebaseapp.com",
+        databaseURL: "https://analytics-49369.firebaseio.com",
+        storageBucket: "analytics-49369.appspot.com",
+        messagingSenderId: "899050856523"
+      };
+      
+      firebase.initializeApp(config);
+      db = firebase.database();
+      
+      // graph
+      google.charts.load('current', {'packages':['corechart']});
+
+      var options = {
+        title: 'nodejs.org server latency',
+        hAxis: { title: 'Time',  titleTextStyle: {color: '#333'}},
+        vAxis: { minValue: 0 }
+      };
+      
+      // update data each time a new value is inserted into the db
+      db.ref('servers/nodejs_org')
+        .orderByKey()
+        .limitToLast(20)
+        .on('value', function(snapshot) {
+        
+          var rawData = [['Year', 'ms']];
+          for (var key in snapshot.val()) {
+            rawData.push([key, snapshot.val()[key].latency]);
+          }
+          
+          var data = google.visualization.arrayToDataTable(rawData);
+          var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
+      );  
+      
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%; height: 500px;">loading data...</div>
+  </body>
+</html>
